@@ -1,0 +1,17 @@
+FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
+USER 0
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt update && apt-get update && apt-get install ffmpeg libsm6 libxext6  build-essential git wget software-properties-common -y && apt purge nvidia* libnvidia* -y && wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin && apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub &&  add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /" &&  apt-get update &&  apt-get -y install cuda
+RUN conda update -n base conda && conda install -n base conda-libmamba-solver && conda config --set solver libmamba
+COPY environment.yml .
+RUN conda env create -f environment.yml
+ARG USER_ID=${USER_ID} 
+ARG USER_GID=${USER_GID}
+ARG USER=${USER}
+RUN groupadd -g $USER_GID $USER && useradd --uid $USER_ID --gid $USER_GID -m $USER 
+RUN echo "conda activate dl-env" >> ~/.bashrc
+ENV PATH /opt/conda/envs/dl-env/bin:$PATH
+RUN git clone https://github.com/open-mmlab/mmaction2.git
+WORKDIR mmaction2
+RUN /opt/conda/envs/dl-env/bin/pip install -e . && /opt/conda/envs/dl-env/bin/pip uninstall mmcv -y && /opt/conda/envs/dl-env/bin/mim install mmcv && /opt/conda/envs/dl-env/bin/mim install mmpose && /opt/conda/envs/dl-env/bin/mim install mmpretrain
+WORKDIR ../

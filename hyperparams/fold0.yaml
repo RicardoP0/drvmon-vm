@@ -1,0 +1,120 @@
+dataset:
+  desc: null
+  value: DriveActDataset
+gpus:
+  desc: null
+  value: 1
+nodes:
+  desc: null
+  value: 1
+precision:
+  desc: null
+  value: bf16-mixed
+batch_size:
+  desc: null
+  value: 32
+test_num_crop:
+  desc: null
+  value: 3
+test_num_segment:
+  desc: null
+  value: 2
+model_name:
+  desc: null
+  value: videomae-base
+data_dir:
+  desc: null
+  value: /media/ricardo/data/datasets/driveact
+num_workers:
+  desc: null
+  value: 8
+early_stop_num:
+  desc: null
+  value: 30
+rand_aug:
+  desc: null
+  value: 1
+mixup:
+  desc: null
+  value: 1
+fixed_data:
+  desc: null
+  value: 1
+gradient_clip_val:
+  desc: null
+  value: 1.8
+model_load_from_checkpoint:
+  desc: null
+  value: 0
+max_nb_epochs:
+  desc: null
+  value: 300
+accum_grad_batches:
+  desc: null
+  value: 2
+t_max_scheduler:
+  desc: null
+  value: 30
+lr:
+  desc: null
+  value: 8.0e-06
+weight_decay:
+  desc: null
+  value: 0.05
+lr_head:
+  desc: null
+  value: 0.0005
+weight_decay_head:
+  desc: null
+  value: 0.05
+weight_avg_lr:
+  desc: null
+  value: 5.0e-05
+label_smoothing:
+  desc: null
+  value: 0.1
+project_folder:
+  desc: null
+  value: driveact
+dataset_artifact:
+  desc: null
+  value: driveact-frames
+modal:
+  desc: null
+  value: inner_mirror
+test_model:
+  desc: null
+  value: 1
+num_classes:
+  desc: null
+  value: 34
+fold:
+  desc: null
+  value: '0'
+n_frames:
+  desc: null
+  value: 16
+net_size:
+  desc: null
+  value: b
+pretrained:
+  desc: null
+  value: DEFAULT
+freeze_backbone:
+  desc: null
+  value: 0
+freeze_stages:
+  desc: null
+  value: -1
+drop_rate:
+  desc: null
+  value: 0.0
+attn_drop_rate:
+  desc: null
+  value: 0.13
+drop_path_rate:
+  desc: null
+  value: 0.0
+head_drop_rate:
+  desc: null
+  value: 0.0
